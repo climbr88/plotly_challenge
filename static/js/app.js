@@ -1,44 +1,20 @@
-function init() {
-    // select dropdown menu 
-    var dropdown = d3.select("#selDataset");
-
-    // read the data 
-    d3.json("samples.json").then((data)=> {
-        console.log(data)
-
-        // get the id data to the dropdwown menu
-        data.names.forEach(function(name) {
-            dropdown.append("option").text(name).property("value");
-        });
-        
-
-        // call the functions to display the data and the plots to the page
-        // getPlots(data.names[0]);
-        // getDemoData(data.names[0]);
-        getPlots(data.names[0]);
-        getDemoData(data.names[0]);
-    });
-}
-
-init();
-
 function getPlots(id) {
     //Read samples.json
         d3.json("samples.json").then (sampledata =>{
             
-            const ids = sampledata.samples[0].otu_ids;
+            var ids = sampledata.samples[0].otu_ids;
             
-            const sample_values =  sampledata.samples[0].sample_values.slice(0,10).reverse();
+            var sample_values =  sampledata.samples[0].sample_values.slice(0,10).reverse();
             
-            
+            var labels =  sampledata.samples[0].otu_labels.slice(0,10);
             
         // slice top 10 otu ids  
-            const otu_top10 = ( sampledata.samples[0].otu_ids.slice(0, 10)).reverse();
+            var otu_top10 = ( sampledata.samples[0].otu_ids.slice(0, 10)).reverse();
         
-            const otu_id = otu_top10.map(d => "OTU " + d);
+            var otu_id = otu_top10.map(d => "OTU " + d);
             
          // slice top 10 labels
-            
+            var labels =  sampledata.samples[0].otu_labels.slice(0,10);
             
             var trace = {
                 x: sample_values,  
@@ -69,17 +45,17 @@ function getPlots(id) {
             // create the bar plot
         Plotly.newPlot("bar", data, layout);
             
-        var trace1 = {
-            x: sampledata.samples[0].otu_ids,
-            y: sampledata.samples[0].sample_values,
-            mode: "markers",
-            marker: {
-                size: sampledata.samples[0].sample_values,
-                color: sampledata.samples[0].otu_ids
-            },
-            text:  sampledata.samples[0].otu_labels
-
-        };
+            var trace1 = {
+                x: sampledata.samples[0].otu_ids,
+                y: sampledata.samples[0].sample_values,
+                mode: "markers",
+                marker: {
+                    size: sampledata.samples[0].sample_values,
+                    color: sampledata.samples[0].otu_ids
+                },
+                text:  sampledata.samples[0].otu_labels
+    
+            };
     
             // set the layout for the bubble plot
             var layout_2 = {
@@ -103,7 +79,8 @@ function getPlots(id) {
     // get metadata info 
             var metadata = data.metadata;
     
-                
+            console.log(metadata)
+    
           // filter meta data info by id
            var result = metadata.filter(meta => meta.id.toString() === id)[0];
           // select demographic panel to put data
@@ -122,3 +99,24 @@ function getPlots(id) {
         getDemoInfo(id);
     }
     
+    // create the function for the initial data rendering
+    function init() {
+        // select dropdown menu 
+        var dropdown = d3.select("#selDataset");
+    
+        // read the data 
+        d3.json("samples.json").then((data)=> {
+            console.log(data)
+    
+            // get the id data to the dropdwown menu
+            data.names.forEach(function(name) {
+                dropdown.append("option").text(name).property("value");
+            });
+    
+            // call the functions to display the data and the plots to the page
+            getPlots(data.names[0]);
+            getDemoData(data.names[0]);
+        });
+    }
+    
+    init();
