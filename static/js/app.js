@@ -120,8 +120,8 @@ function getPlots(id) {
     }
     // create the function for the change event
     function optionChanged(id) {
-        getPlots(newid);
-        getDemoInfo(newid);
+        Plotly.restyle("bar", "values", [newdata]);
+        Plotly.restyle("bubble", "values", [newdata]);
     }
     
     
