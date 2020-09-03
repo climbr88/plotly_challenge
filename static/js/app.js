@@ -120,8 +120,8 @@ function getPlots(id) {
     }
     // create the function for the change event
     function optionChanged(id) {
-        getPlots(id);
-        getDemoInfo(id);
+        getPlots(newid);
+        getDemoInfo(newid);
     }
     
     
