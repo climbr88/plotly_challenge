@@ -94,9 +94,7 @@ function getPlots(id) {
         });
     }
     // create the function for the change event
-    d3.select(#selDatset).on("change", function(optionChanged) {
-            
-    
+    function optionChanged(id) {
         getPlots(id);
         getDemoInfo(id);
     }
