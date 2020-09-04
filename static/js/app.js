@@ -1,4 +1,3 @@
-// create  function for the initial data
 function getPlots(id) {
     //Read samples.json
         d3.json("samples.json").then (sampledata =>{
@@ -95,7 +94,9 @@ function getPlots(id) {
         });
     }
     // create the function for the change event
-    function optionChanged(id) {
+    d3.select(#selDatset).on("change", function(optionChanged) {
+            
+    
         getPlots(id);
         getDemoInfo(id);
     }
