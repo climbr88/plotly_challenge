@@ -10,4 +10,4 @@ Our tasks included populating a dropdown with all the participant IDs, create a 
 Each should change with selections by users fro the dropdown menu
 
 
-![Barchart Image](Images/dashboard_part1.png)
+![Barchart Image](Images/buble_chart.png)
